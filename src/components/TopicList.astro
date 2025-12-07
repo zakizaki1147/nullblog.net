@@ -1,0 +1,36 @@
+---
+import "../styles/global.css";
+const topicLists = [
+  { name: "Absurd & Uncanny", link: "" },
+  { name: "Accidents & Incidents", link: "" },
+  { name: "Foods & Drinks", link: "" },
+  { name: "History", link: "" },
+  { name: "Hobbies & Collections", link: "" },
+  { name: "Humor & Satire", link: "" },
+  { name: "Internet & Technology", link: "" },
+  { name: "Love & Confessions", link: "" },
+  { name: "[CENSORED]", link: "" },
+  { name: "Personal Experiences", link: "" },
+  { name: "Pets & Animals", link: "" },
+  { name: "Politics & [REDACTED]", link: "" },
+  { name: "Sciences & Nature", link: "" },
+  { name: "Space & Extraterrestrials", link: "" },
+  { name: "Supernatural & Occultism", link: "" },
+  { name: "[CORRUPTED]", link: "" },
+];
+---
+
+<div class="border-2 border-gray-primary w-max h-fit shrink-0">
+  <h3 class="font-bold font-serif text-xl text-center p-3 bg-gray-primary">
+    Topics
+  </h3>
+  <ul class="list-disc pl-8 pr-6 py-3">
+    {
+      topicLists.map((topicList) => (
+        <li class="font-bold font-serif text-darkblue-primary text-sm underline underline-offset-2 mb-1.5 w-fit cursor-pointer active:text-red-primary">
+          {topicList.name}
+        </li>
+      ))
+    }
+  </ul>
+</div>

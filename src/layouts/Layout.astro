@@ -1,0 +1,46 @@
+---
+import "../styles/global.css";
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>nullblog.net</title>
+    </head>
+    <body class="flex flex-col justify-center items-center">
+        <div class="flex flex-col justify-center items-center gap-3 w-[900px] py-10">
+            <div class="flex flex-col justify-center items-center gap-2 w-full p-5 bg-gray-primary">
+                <h1 class="font-serif font-bold text-red-primary text-3xl">Attention!</h1>
+                <p class="font-sans font-medium text-sm">This website is an archived version of the last update before it was taken down in XXX. User interaction has been disabled.</p>
+            </div>
+            <div class="flex flex-col justify-center items-center w-full p-5 bg-[url(../assets/title.webp)] bg-cover bg-center text-white">
+                <h1 class="font-bold font-sans text-3xl bg-black p-1">null<span class="font-serif font-medium">blog.net</span></h1>
+                <h2 class="font-bold tracking-wider bg-black p-1">Post your story without worry!</h2>
+            </div>
+            <div class="flex flex-col justify-center items-center gap-0.5 w-full">
+                <div class="flex justify-between items-center w-full text-sm">
+                    <p>v1.5.7</p>
+                    <p>6/6/6</p>
+                </div>
+                <hr class="border border-black w-full">
+                <hr class="border border-black w-full">
+            </div>
+            <slot />
+        </div>
+		<script is:inline>
+			document.addEventListener("DOMContentLoaded", () => {
+				document.querySelectorAll("[data-unblur-button]").forEach((button) => {
+					button.addEventListener("click", () => {
+						const wrapper = button.closest("[data-blur-wrapper]");
+						const image = wrapper?.querySelector("img");
+						const overlay = wrapper?.querySelector("[data-blur-overlay]");
+						image?.classList.remove("blur-md");
+						overlay?.remove();
+					})
+				})
+			})
+		</script>
+    </body>
+</html>

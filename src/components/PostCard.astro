@@ -1,0 +1,78 @@
+---
+import { postCardStyles } from "../utils/postCardStyles";
+import BlurImage from "./BlurImage.astro";
+import {
+  ArrowBigDownDash,
+  ArrowBigUpDash,
+  MessageSquareMore,
+} from "@lucide/astro";
+
+const {
+  username,
+  date,
+  topic,
+  title,
+  description,
+  image,
+  blurred = false,
+  upvotes,
+  comments,
+} = Astro.props;
+// @ts-ignore
+const style = postCardStyles[topic] ?? postCardStyles.default;
+---
+
+<div
+  class={`flex flex-col justify-center gap-1 w-full p-4 ${style.bg} border-2 ${style.border} ${style.text}`}
+>
+  <div class="flex justify-between w-full">
+    <div class="flex justify-center items-center gap-1 font-serif text-sm">
+      <h4>{username}</h4>
+      <h5 class={`text-xs ${style.dateText}`}>• [{date}]</h5>
+    </div>
+    <h5
+      class={`w-fit px-2.5 py-1 font-semibold text-xs ${style.tagText} ${style.tagBg}`}
+    >
+      {topic}
+    </h5>
+  </div>
+  <h3 class="font-bold font-serif text-lg">{title}</h3>
+  <p class="font-medium text-sm line-clamp-4" set:html={description} />
+  {image && blurred === true && <BlurImage src={image} blurred={true} />}
+  {
+    image && blurred === false && (
+      <div class="w-[280px] mt-1 overflow-hidden">
+        <img src={image} alt="image" />
+      </div>
+    )
+  }
+  <div class="flex justify-between text-black mt-1">
+    <div class="flex gap-1">
+      <div
+        class="flex justify-center items-center gap-1.5 w-fit px-2 py-1.5 bg-gray-primary border-2 border-black"
+      >
+        <div class="flex justify-center items-center gap-1 cursor-not-allowed">
+          <ArrowBigUpDash size={20} stroke-width={1.5} />
+          <p class="font-medium text-xs">{upvotes}</p>
+        </div>
+        <p class="font-medium text-xs pb-1">|</p>
+        <ArrowBigDownDash
+          size={20}
+          stroke-width={1.5}
+          class="cursor-not-allowed"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center gap-1 w-fit px-2 py-1.5 bg-gray-primary border-2 border-black active:bg-gray-300 cursor-pointer"
+      >
+        <MessageSquareMore size={20} stroke-width={1.5} />
+        <p class="font-medium text-xs">{comments}</p>
+      </div>
+    </div>
+    <button
+      class="font-medium text-xs px-2 py-1.5 bg-gray-primary border-2 border-black active:bg-gray-300 cursor-pointer"
+    >
+      See More
+    </button>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+---
+const { src, blurred = false } = Astro.props;
+---
+
+<div
+  class="w-[280px] my-1 overflow-hidden relative"
+  data-blur-wrapper={blurred ? true : null}
+>
+  <img src={src} alt="image" class={blurred ? "blur-md" : ""} />
+  {
+    blurred && (
+      <div
+        class="absolute inset-0 flex justify-center items-center p-5"
+        data-blur-overlay
+      >
+        <div class="p-3 bg-yellow-primary/50 flex flex-col justify-center items-center gap-1">
+          <p class="font-sans font-medium text-center text-xs">
+            This image is setted to be blurred by the uploader, probably
+            contains inappropriate visuals. Click the button to see the image.
+          </p>
+          <button
+            class="px-3 py-2 bg-gray-primary border-2 border-black font-sans font-medium text-xs cursor-pointer"
+            data-unblur-button
+          >
+            See the image
+          </button>
+        </div>
+      </div>
+    )
+  }
+</div>

@@ -1,16 +1,239 @@
 ---
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import TopicList from "../components/TopicList.astro";
+import PostCard from "../components/PostCard.astro";
+import burgerheadAd from "../assets/burgerheadAd.webp";
+import wonderhoy from "../assets/Absurd&Uncanny/Wonderhoy!.webp";
+import simpsons from "../assets/tesgif.gif";
+import spongebobBirthday from "../assets/SpongebobBirthday.gif";
+import meowl from "../assets/Meowl.gif";
 
+const postContents = [
+  {
+    username: "world_record_egg",
+    date: "3/3/3",
+    topic: "Absurd & Uncanny",
+    title: "Just an Egg",
+    description:
+      "Let’s set a world record together and get the most upvoted post on Nullblog. Beating the current world record held by Kylie Jenner (18 thousand upvoted)! We got this 🙌 <br> <br> #UpvoteTheEgg #EggSoldiers #EggGang",
+    image: "src/assets/Absurd&Uncanny/WorldEgg.webp",
+    blurred: false,
+    upvotes: "21.4K",
+    comments: "331",
+  },
+  {
+    username: "meme_courses",
+    date: "3/3/3",
+    topic: "Humor & Satire",
+    title: "Generational Meme",
+    description:
+      "On a recent stream, one of the most popular streamers, YouDemonstrateVelocity, made a very funny face after hearing his viewer say “My mom is kinda homeless” while playing a multiplayer game. Hearing that, Velocity tried his best not to laugh to respect his viewer’s condition. <br> What situation would make you guys make a face like this?",
+    image: "src/assets/Humor&Satire/MyMomIsKindaHomeless.gif",
+    blurred: false,
+    upvotes: "19.2K",
+    comments: "247",
+  },
+  {
+    username: "Wonderhoy!",
+    date: "3/3/3",
+    topic: "Wonderhoy!",
+    title: "Wonderhoy!",
+    description: "Wonderhoy!",
+    image: "src/assets/Absurd&Uncanny/Wonderhoy!.webp",
+    blurred: false,
+    upvotes: "18.7K",
+    comments: "948",
+  },
+  {
+    username: "c4c4krikri",
+    date: "3/3/3",
+    topic: "Pets & Animals",
+    title: "Meet the Slayer!",
+    description:
+      "Ayyyy finally I have my own cat after wanting it for a long time😭 btw his name is Dragon SlayerX!",
+    image: "src/assets/Pets&Animals/CatSlayer.webp",
+    blurred: false,
+    upvotes: "16.3K",
+    comments: "105",
+  },
+  {
+    username: "matt",
+    date: "3/3/3",
+    topic: "Love & Confessions",
+    title: "About You",
+    description:
+      "I know a place. It's somewhere I go when I need to remember your face. <br> We get married in our heads. Something to do whilst we try to recall how we met. <br> <br> Do you think I have forgotten? <br> Do you think I have forgotten about you? <br> <br> You and I, were alive. With nothing to do I could lay and just look in your eyes. <br> Wait and pretend, hold on and hope that we'll find our way back in the end. <br> <br> Do you think I have forgotten? <br> Do you think I have forgotten about you?",
+    upvotes: "16.1K",
+    comments: "189",
+  },
+  {
+    username: "ash",
+    date: "3/3/3",
+    topic: "Hobbies & Collections",
+    title: "I Got the Rarest Hamamon Card!",
+    description:
+      "AHAHAHAHA I got the legendary Hamamon card, the Hero and the Hater! The only one in this world! HAHAHAHAHAHAHA",
+    image: "src/assets/Hobbies&Collections/TheHeroAndTheHater.webp",
+    blurred: true,
+    upvotes: "15K",
+    comments: "276",
+  },
+  {
+    username: "NatLivs",
+    date: "3/3/3",
+    topic: "Personal Experiences",
+    title: "Thoughts on This Website's Recent Posts?",
+    description:
+      "Huftt, this website’s content are getting weirder by the day... <br> Recently, many users have been posting many weird, disturbing, and NSFW contents, even though this website originally has general to wholesome content. <br> What do you guys think about this situation?",
+    upvotes: "18.7K",
+    comments: "282",
+  },
+  {
+    username: "SC_star",
+    date: "3/3/3",
+    topic: "Space & Extraterrestrials",
+    title: "The Pale Blue Dot",
+    description:
+      "This is a photograph of our planet taken on #/#/89 by the Star Constellation’s space probe from far, far away. In the photograph, our planet appears as a tiny dot against the vastness of space, among bands of sunlight reflected by the camera. <br> <br> This photograph is considered as one of the most important photograph ever taken in the world because of its historical aspect, its influence on the advancement of space technology, and its role as “Family Portrait” of the XXXlings.",
+    image: "src/assets/Space&Extraterrestrials/PaleBlueDot.webp",
+    blurred: false,
+    upvotes: "18.7K",
+    comments: "948",
+  },
+  {
+    username: "kurniawan_henry",
+    date: "3/3/3",
+    topic: "Internet & Technology",
+    title: "My Friend Disappeared After Opening a Website Link",
+    description:
+      "Previously, me and one of my friend found a suspicious link from diving deep into the internet. We found the link just simply appeared without any context. Then yesterday, my friend said he wanted to open the link, but I didn’t want to open it because I was afraid something would happen to my data. And now... I can't find any news from my friend. I tried to visit his house but there was no answer. He's gone...  <br> <br> Here is the link, be careful https://bit.ly/43Du7Eh",
+    upvotes: "18.7K",
+    comments: "948",
+  },
+  {
+    username: "mamank_carlos_kun",
+    date: "3/3/3",
+    topic: "Foods & Drinks",
+    title: "What is the Most Delicious Food of All Time?",
+    description:
+      "Let’s give your opinion about the most delicious food of all time! Mine is rendang! 😋",
+    upvotes: "18.7K",
+    comments: "948",
+  },
+  {
+    username: "FingeSD",
+    date: "3/3/3",
+    topic: "[CENSORED]",
+    title: "Live Streaming of the Dead",
+    description:
+      "When I was doomscrolling in ###, I saw a live streaming of a girl like in her early 20s preparing for something. She brought in some familiar items for... committing suicide, such as a rope and a chair. I kept watching the stream, wondering if this was a real situation or just a cheap prank. As the stream progressed, the number of viewers steadily grew. Not many of them even asked for the woman to actually commit suicide. And yup, after the viewers reached 10.000, she actually committed suicide by jumping from the chair with the rope tied around her neck. She was... hanging, in front of the camera.",
+    upvotes: "18.7K",
+    comments: "948",
+  },
+  {
+    username: "JayMaskell",
+    date: "3/3/3",
+    topic: "Supernatural & Occultism",
+    title: "Accidently Saw a Cult Ritual",
+    description:
+      "No shit. I saw a group of people doing some strange things in the woods near my house. They burned someone alive. <br> <br> Yesterday, during night, me and my brother heard some loud noises from the forest behind our house. Something like loud bush rumble. Then I wanted to went out of the house to check the sound. I was afraid it was the sound of a bear trying to get out of the forest. My brother insisted on coming along because he was afraid of being alone at home. Our parents still hadn't come home from work. I took my flashlight, locked the door, and went straight to woods with my brother. <br> <br> In the forest, we did not see any bears, or any wild animals. But we saw many- a group of people in white robe, forming a circle. We are in confusion, but also curious. I turned off my flashlight and we went into full silent mode to see what they would do. But, somehow, my brother has been acting weird recently.",
+    upvotes: "18.7K",
+    comments: "948",
+  },
+  {
+    username: "a",
+    date: "3/3/3",
+    topic: "Sciences & Nature",
+    title: "Yggdrasil, the Tree of Life",
+    description: "a",
+    upvotes: "18.7K",
+    comments: "948",
+  },
+  {
+    username: "HiNaShiKi",
+    date: "3/3/3",
+    topic: "History",
+    title: "Atomic Bombing of ###",
+    description:
+      "## years ago, an atomic bomb was detonated in the city of ### by ### to “end” the war of ###.",
+    image: "src/assets/History/CloudBomb.webp",
+    blurred: false,
+    upvotes: "18.7K",
+    comments: "948",
+  },
+  {
+    username: "xiachun",
+    date: "3/3/3",
+    topic: "Accidents & Incidents",
+    title: "Flight Crash Captured in Dashcam",
+    description:
+      "A horrifying photo of a crashing plane was captured in a dashcam car on #/#/###. Trans### Airways was a domestic flight from ### to ###. Because of an engine failure, the plane crashed into the ### River after crashing its left wing to a local highway. On board were 58 people, 15 of whom survived with injuries.",
+    image: "src/assets/Accidents&Incidents/FlightCrash.webp",
+    blurred: true,
+    upvotes: "18.7K",
+    comments: "948",
+  },
+  {
+    username: "SOG",
+    date: "3/3/3",
+    topic: "Politics & [REDACTED]",
+    title: "The Situation of Salvatore Family",
+    description:
+      "The most respected family in the world, <strong>the Salvatore Family</strong>, now in a worrying condition. After the recent death of the 7th head of the family who was also the leader of ### and a father, Claudio Salvatore, the country and the family is in the “vacuum of power” condition. There was no clear family heir among Claudio’s three children. When the third child doesn’t give any sh*t, the first and second child are in conflict arguing about who is worthy to be the 8th head of the family. <br> <br> The first child, Ulrico Salvatore is known as a cruel leader but he is a firm person and very strict to the rules. The second child, Federico Salvatore is known as a kind leader, very protective of his people, but he can be too soft sometimes. The third child, Claudia Salvatore is just happen to be there. <br> <br> Because of this “vacuum of power” and family conflict condition, the situation of ###’s people is getting heated too. Many people support Federico to be the 8th leader, but the people who support Ulrico are also no less numerous. Well, there are some people that don’t give any sh*t just like Claudia.",
+    upvotes: "18.7K",
+    comments: "948",
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <div class="flex gap-2 w-full relative">
+    <div
+      class="flex flex-col justify-center items-center gap-2 w-[248px] h-fit"
+    >
+      <TopicList />
+      <div class="border-2 border-yellow-primary cursor-pointer">
+        <img src={spongebobBirthday.src} alt="image" />
+      </div>
+      <div class="border-2 border-pink-primary cursor-pointer">
+        <img src={wonderhoy.src} alt="image" />
+      </div>
+      <div class="border-2 border-brown-secondary cursor-pointer">
+        <img src={burgerheadAd.src} alt="image" />
+      </div>
+      <div class="border-2 border-darkgreen-primary cursor-pointer">
+        <img src={meowl.src} alt="image" />
+      </div>
+    </div>
+    <div class="flex flex-col items-center gap-2 w-full">
+      <div
+        class="flex justify-center items-center gap-4 w-full px-5 py-4 bg-yellow-primary"
+      >
+        <h3 class="font-bold font-serif text-xl text-red-primary">Warning!</h3>
+        <p class="font-medium text-sm">
+          Recently, many users have uploaded contents that is not suitable for
+          all ages. We expect user discretion in viewing posts on this website.
+        </p>
+      </div>
+      <h2 class="font-bold font-serif text-2xl">
+        Popular Posts From Each Topics
+      </h2>
+      {
+        postContents.map((postContent) => (
+          <PostCard
+            username={postContent.username}
+            date={postContent.date}
+            topic={postContent.topic}
+            title={postContent.title}
+            description={postContent.description}
+            image={postContent.image}
+            blurred={postContent.blurred}
+            upvotes={postContent.upvotes}
+            comments={postContent.comments}
+          />
+        ))
+      }
+    </div>
+  </div>
+</Layout>
