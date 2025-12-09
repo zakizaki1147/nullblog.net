@@ -1,5 +1,6 @@
 ---
 import { postCardStyles } from "../utils/postCardStyles";
+import { topicSlugMap } from "../utils/topicSlugMap";
 import BlurImage from "./BlurImage.astro";
 import {
   ArrowBigDownDash,
@@ -7,19 +8,40 @@ import {
   MessageSquareMore,
 } from "@lucide/astro";
 
+const incomingProps = Astro.props.post ?? Astro.props;
+
 const {
-  username,
-  date,
-  topic,
-  title,
-  description,
-  image,
+  username = "unknown",
+  date = "",
+  topic = "",
+  title = "",
+  description = "",
+  image = null,
   blurred = false,
-  upvotes,
-  comments,
-} = Astro.props;
+  upvotes = "0",
+  comments = "0",
+} = incomingProps;
+
+const topicStr = typeof topic === "string" ? topic : String(topic);
+
 // @ts-ignore
 const style = postCardStyles[topic] ?? postCardStyles.default;
+
+let imageSrc = null;
+if (image) {
+  imageSrc = typeof image === "string" ? image : (image?.src ?? image);
+}
+
+const keys = Object.keys(topicSlugMap) as (keyof typeof topicSlugMap)[];
+const slugFromMap = keys.find((k) => topicSlugMap[k] === topicStr);
+const topicSlug =
+  slugFromMap ??
+  encodeURIComponent(
+    topicStr
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9\-]/g, "")
+  );
 ---
 
 <div
@@ -30,19 +52,20 @@ const style = postCardStyles[topic] ?? postCardStyles.default;
       <h4>{username}</h4>
       <h5 class={`text-xs ${style.dateText}`}>• [{date}]</h5>
     </div>
-    <h5
+    <a
+      href={`/topic/${topicSlug}`}
       class={`w-fit px-2.5 py-1 font-semibold text-xs ${style.tagText} ${style.tagBg}`}
     >
-      {topic}
-    </h5>
+      {topicStr}
+    </a>
   </div>
   <h3 class="font-bold font-serif text-lg">{title}</h3>
   <p class="font-medium text-sm line-clamp-4" set:html={description} />
-  {image && blurred === true && <BlurImage src={image} blurred={true} />}
+  {image && blurred === true && <BlurImage src={imageSrc} blurred={true} />}
   {
     image && blurred === false && (
       <div class="w-[280px] mt-1 overflow-hidden">
-        <img src={image} alt="image" />
+        <img src={imageSrc} alt="image" />
       </div>
     )
   }

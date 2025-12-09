@@ -1,22 +1,22 @@
 ---
 import "../styles/global.css";
+
 const topicLists = [
-  { name: "Absurd & Uncanny", link: "" },
-  { name: "Accidents & Incidents", link: "" },
-  { name: "Foods & Drinks", link: "" },
-  { name: "History", link: "" },
-  { name: "Hobbies & Collections", link: "" },
-  { name: "Humor & Satire", link: "" },
-  { name: "Internet & Technology", link: "" },
-  { name: "Love & Confessions", link: "" },
-  { name: "[CENSORED]", link: "" },
-  { name: "Personal Experiences", link: "" },
-  { name: "Pets & Animals", link: "" },
-  { name: "Politics & [REDACTED]", link: "" },
-  { name: "Sciences & Nature", link: "" },
-  { name: "Space & Extraterrestrials", link: "" },
-  { name: "Supernatural & Occultism", link: "" },
-  { name: "[CORRUPTED]", link: "" },
+  { name: "Absurd & Uncanny", slug: "absurd-uncanny" },
+  { name: "Accidents & Incidents", slug: "accidents-incidents" },
+  { name: "Foods & Drinks", slug: "foods-drinks" },
+  { name: "History", slug: "history" },
+  { name: "Hobbies & Collections", slug: "hobbies-collections" },
+  { name: "Humor & Satire", slug: "humor-satire" },
+  { name: "Internet & Technology", slug: "internet-technology" },
+  { name: "Love & Confessions", slug: "love-confessions" },
+  { name: "[CENSORED]", slug: "murders-assassinations" },
+  { name: "Personal Experiences", slug: "personal-experiences" },
+  { name: "Pets & Animals", slug: "pets-animals" },
+  { name: "Politics & [REDACTED]", slug: "politics-elites" },
+  { name: "Sciences & Nature", slug: "sciences-nature" },
+  { name: "Space & Extraterrestrials", slug: "space-extraterrestrials" },
+  { name: "Supernatural & Occultism", slug: "supernatural-occultism" },
 ];
 ---
 
@@ -28,9 +28,12 @@ const topicLists = [
     {
       topicLists.map((topicList) => (
         <li class="font-bold font-serif text-darkblue-primary text-sm underline underline-offset-2 mb-1.5 w-fit cursor-pointer active:text-red-primary">
-          {topicList.name}
+          <a href={`/topic/${topicList.slug}`} class="w-full h-full">
+            {topicList.name}
+          </a>
         </li>
       ))
     }
+    <li class="font-bold font-serif text-sm mb-1.5 w-fit">[CORRUPTED]</li>
   </ul>
 </div>
